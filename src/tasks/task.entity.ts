@@ -1,9 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { TaskStatus } from './task-status.enum';
+import { User } from '../auth/user.entity';
+
 
 @Entity()
 export class Task extends BaseEntity{
-     @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn()
     id: number;
      
     @Column()
@@ -14,5 +16,9 @@ export class Task extends BaseEntity{
 
     @Column()
     status: TaskStatus;
+    // user: import("c:/Users/engbe/OneDrive/Documents/developments/task-manager/src/auth/user.entity").User;
+
+    @ManyToMany(type => User, user => user.tasks, { eager: false })
+    user: User;
 
 }
