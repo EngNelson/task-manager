@@ -17,6 +17,7 @@ password: string;
 @Column()
 salt: string;
     tasks: any;
+    static username: any;
 
 async validatePassword(password: string): Promise<boolean>{
     const hash = await bcrypt.hash(password, this.salt);
